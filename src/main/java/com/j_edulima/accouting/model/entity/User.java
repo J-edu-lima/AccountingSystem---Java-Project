@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.j_edulima.accouting.model.valueObject.Email;
 import com.j_edulima.accouting.model.valueObject.Password;
 
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,9 +25,9 @@ public class User implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
-
+	@Embedded
 	private Email email;
-
+	@Embedded
 	private Password password;
 
 	public User() {

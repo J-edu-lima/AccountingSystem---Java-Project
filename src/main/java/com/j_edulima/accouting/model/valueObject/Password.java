@@ -2,10 +2,13 @@ package com.j_edulima.accouting.model.valueObject;
 
 import java.util.regex.Pattern;
 
+import jakarta.persistence.Embeddable;
+
+@Embeddable
 public class Password {
 
 	private static final String regex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@#$%^&+=!]).{8,}$";
-	
+
 	private String password;
 
 	public Password(String password) {
@@ -15,7 +18,10 @@ public class Password {
 	}
 
 	private boolean validatePassword(String password) {
-		return Pattern.matches(regex, password);
+		if (Pattern.matches(regex, password)) {
+			return true;
+		}
+		throw new IllegalArgumentException("Senha inválida");
 	}
 
 	@Override
