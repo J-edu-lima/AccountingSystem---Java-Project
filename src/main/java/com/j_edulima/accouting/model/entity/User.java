@@ -1,4 +1,4 @@
-package com.j_edulima.accouting.entity;
+package com.j_edulima.accouting.model.entity;
 
 import java.util.Collection;
 import java.util.List;
@@ -6,6 +6,9 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.j_edulima.accouting.model.valueObject.Email;
+import com.j_edulima.accouting.model.valueObject.Password;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,15 +25,15 @@ public class User implements UserDetails {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 
-	private String username;
+	private Email email;
 
-	private String password;
+	private Password password;
 
 	public User() {
 	}
 
-	public User(String username, String password) {
-		this.username = username;
+	public User(Email email, Password password) {
+		this.email = email;
 		this.password = password;
 	}
 
@@ -41,12 +44,12 @@ public class User implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		return password;
+		return password.toString();
 	}
 
 	@Override
 	public String getUsername() {
-		return username;
+		return email.toString();
 	}
 
 }
