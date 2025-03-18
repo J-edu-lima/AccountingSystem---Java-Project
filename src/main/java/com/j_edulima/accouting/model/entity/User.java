@@ -2,6 +2,7 @@ package com.j_edulima.accouting.model.entity;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -33,14 +34,14 @@ public class User implements UserDetails {
 	public User() {
 	}
 
-	public User(Email email, Password password) {
+	public User(Long id, Email email, Password password) {
+		this.id = id;
 		this.email = email;
 		this.password = password;
 	}
 
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+	public Long getId() {
+		return id;
 	}
 
 	@Override
@@ -51,6 +52,28 @@ public class User implements UserDetails {
 	@Override
 	public String getUsername() {
 		return email.toString();
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		return Objects.equals(id, other.id);
 	}
 
 }
