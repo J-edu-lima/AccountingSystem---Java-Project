@@ -1,4 +1,4 @@
-package com.j_edulima.accouting.security;
+package com.j_edulima.accouting.security.token;
 
 import java.io.IOException;
 
@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.j_edulima.accouting.repository.UserRegisterRepository;
-import com.j_edulima.accouting.security.token.TokenInterface;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -18,7 +17,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Component
-public class SecurityFilter extends OncePerRequestFilter {
+public class JwtSecurityFilter extends OncePerRequestFilter {
 
 	@Autowired
 	TokenInterface tokenService;

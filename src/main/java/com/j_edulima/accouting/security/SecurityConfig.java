@@ -14,22 +14,27 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.j_edulima.accouting.security.token.JwtSecurityFilter;
+
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
 
 	@Autowired
-	SecurityFilter securityFilter;
+	JwtSecurityFilter securityFilter;
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 		return httpSecurity.csrf(csrf -> csrf.disable())
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-				.authorizeHttpRequests(authorize -> authorize.requestMatchers("/auth/**", "/h2-console/**").permitAll()
-						.anyRequest().authenticated())
-				.headers(headers -> headers.frameOptions(frame -> frame.disable()))
-				.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class).build();
+				.authorizeHttpRequests(authorize -> authorize
+				.requestMatchers("/auth/**", "/h2-console/**").permitAll()
+				.anyRequest().authenticated())
+				.headers(headers -> headers
+				.frameOptions(frame -> frame.disable()))
+				.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+				.build();
 	}
 
 	@Bean
