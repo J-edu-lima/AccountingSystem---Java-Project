@@ -1,4 +1,4 @@
-package com.j_edulima.accouting.model.entity;
+package com.j_edulima.accouting.model;
 
 import java.util.Collection;
 import java.util.List;
@@ -8,11 +8,13 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.j_edulima.accouting.model.enums.UserRole;
 import com.j_edulima.accouting.model.valueObject.Email;
 import com.j_edulima.accouting.model.valueObject.Password;
 
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -30,14 +32,16 @@ public class User implements UserDetails {
 	private Email email;
 	@Embedded
 	private Password password;
+	@Enumerated
+	private UserRole role;
 
 	public User() {
 	}
 
-	public User(Long id, Email email, Password password) {
-		this.id = id;
+	public User(Email email, Password password, UserRole role) {
 		this.email = email;
 		this.password = password;
+		this.role = role;
 	}
 
 	public Long getId() {
