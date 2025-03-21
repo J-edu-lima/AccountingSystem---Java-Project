@@ -58,6 +58,10 @@ public class User implements UserDetails {
 		return email.toString();
 	}
 
+	public UserRole getRole() {
+		return role;
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return List.of(new SimpleGrantedAuthority("ROLE_USER"));

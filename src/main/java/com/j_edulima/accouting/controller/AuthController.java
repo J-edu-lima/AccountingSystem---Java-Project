@@ -1,4 +1,4 @@
-package com.j_edulima.accouting.security.auth.controller;
+package com.j_edulima.accouting.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

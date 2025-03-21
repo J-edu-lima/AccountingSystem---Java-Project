@@ -1,6 +1,7 @@
 package com.j_edulima.accouting.mapper;
 
 import com.j_edulima.accouting.dto.UserRegisterDTO;
+import com.j_edulima.accouting.dto.UserRequestDTO;
 import com.j_edulima.accouting.model.User;
 import com.j_edulima.accouting.model.enums.UserRole;
 import com.j_edulima.accouting.model.valueObject.Email;
@@ -17,4 +18,8 @@ public class UserMapper {
 				UserRole.USER);
 	}
 
+	public static User toEntity(UserRequestDTO dto) {
+		return new User(new Email(dto.email().toString()), new Password(dto.password().passwordEncoder(dto.password())),
+				UserRole.USER);
+	}
 }
