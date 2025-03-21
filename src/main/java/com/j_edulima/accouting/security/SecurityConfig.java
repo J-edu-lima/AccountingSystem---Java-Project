@@ -29,8 +29,16 @@ public class SecurityConfig {
 		return httpSecurity.csrf(csrf -> csrf.disable())
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(authorize -> authorize
-				.requestMatchers("/auth/**", "/h2-console/**").permitAll()
+				.requestMatchers(
+						"/auth/**",
+						"/h2-console/**", 
+						"/swagger-ui.html",
+						"/v3/api-docs/**",
+						"/swagger-ui/**",
+						"/webjars/**")
+				.permitAll()
 				.anyRequest().authenticated())
+				
 				.headers(headers -> headers
 				.frameOptions(frame -> frame.disable()))
 				.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

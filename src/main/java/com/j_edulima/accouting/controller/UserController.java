@@ -16,14 +16,19 @@ import com.j_edulima.accouting.dto.UserRequestDTO;
 import com.j_edulima.accouting.model.User;
 import com.j_edulima.accouting.service.UserService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping(value = "/v1/users")
+@Tag(name = "users", description = "Gerenciamento de usuários")
 public class UserController {
 
 	@Autowired
 	private UserService service;
 
 	@DeleteMapping("/{id}")
+	@Operation(summary = "Busca e deleta um usuário pelo ID", description = "Deleta um usuário pelo ID fornecido.")
 	public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
 		service.delete(id);
 
@@ -31,6 +36,7 @@ public class UserController {
 	}
 
 	@GetMapping("/{id}")
+	@Operation(summary = "Busca um usuário pelo ID", description = "Retorna um usuário pelo ID fornecido.")
 	public ResponseEntity<UserRequestDTO> find(@PathVariable("id") Long id) {
 		User user = service.find(id);
 
@@ -38,6 +44,7 @@ public class UserController {
 	}
 
 	@GetMapping
+	@Operation(summary = "Busca todos os usuários", description = "Retorna todos os usuários.")
 	public ResponseEntity<List<UserRequestDTO>> findAll() {
 		List<User> users = service.findAll();
 		List<UserRequestDTO> userDTOs = users.stream().map(x -> new UserRequestDTO(x)).collect(Collectors.toList());
