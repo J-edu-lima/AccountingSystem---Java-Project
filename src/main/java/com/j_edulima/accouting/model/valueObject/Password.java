@@ -5,6 +5,8 @@ import java.util.regex.Pattern;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.j_edulima.accouting.handler.InvalidPasswordException;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
@@ -28,7 +30,7 @@ public class Password {
 		if (Pattern.matches(regex, password)) {
 			return true;
 		}
-		throw new IllegalArgumentException("Senha inválida");
+		throw new InvalidPasswordException();
 	}
 
 	@Bean

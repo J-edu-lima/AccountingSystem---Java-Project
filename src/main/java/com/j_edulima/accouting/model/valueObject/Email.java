@@ -7,7 +7,7 @@ import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class Email {
-	private static final String regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+	private static final String regex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
 	private static final Pattern pattern = Pattern.compile(regex);
 	
 	@Column(name = "email_value", unique = true)
@@ -26,7 +26,7 @@ public class Email {
 		if (email != null && pattern.matcher(email).matches()) {
 			return true;
 		}
-		throw new IllegalArgumentException("Email inválido");
+		throw new RuntimeException("Formato do Email inválido");
 	}
 
 	public String getValue() {
