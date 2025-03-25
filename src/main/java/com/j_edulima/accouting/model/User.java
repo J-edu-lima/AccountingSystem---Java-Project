@@ -12,12 +12,14 @@ import com.j_edulima.accouting.model.enums.UserRole;
 import com.j_edulima.accouting.model.valueObject.Email;
 import com.j_edulima.accouting.model.valueObject.Password;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -28,12 +30,18 @@ public class User implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
+
 	@Embedded
 	private Email email;
+
 	@Embedded
 	private Password password;
+
 	@Enumerated
 	private UserRole role;
+
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Company company;
 
 	public User() {
 	}
