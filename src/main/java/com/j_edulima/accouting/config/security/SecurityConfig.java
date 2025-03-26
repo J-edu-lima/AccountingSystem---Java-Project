@@ -1,4 +1,4 @@
-package com.j_edulima.accouting.security;
+package com.j_edulima.accouting.config.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.j_edulima.accouting.security.token.JwtSecurityFilter;
+import com.j_edulima.accouting.config.security.token.JwtSecurityFilter;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity

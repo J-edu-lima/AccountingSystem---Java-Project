@@ -1,4 +1,4 @@
-package com.j_edulima.accouting.security;
+package com.j_edulima.accouting.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

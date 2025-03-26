@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.j_edulima.accouting.config.security.auth.AuthenticationService;
 import com.j_edulima.accouting.dto.UserLoginRequestDTO;
 import com.j_edulima.accouting.dto.UserRegisterDTO;
-import com.j_edulima.accouting.security.auth.AuthenticationService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -1,4 +1,4 @@
-package com.j_edulima.accouting.security.auth;
+package com.j_edulima.accouting.config.security.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.j_edulima.accouting.config.security.token.TokenInterface;
 import com.j_edulima.accouting.dto.UserLoginRequestDTO;
 import com.j_edulima.accouting.dto.UserLoginResponseDTO;
 import com.j_edulima.accouting.dto.UserRegisterDTO;
@@ -18,7 +19,6 @@ import com.j_edulima.accouting.handler.DataErrorException;
 import com.j_edulima.accouting.mapper.UserMapper;
 import com.j_edulima.accouting.model.User;
 import com.j_edulima.accouting.repository.UserRegisterRepository;
-import com.j_edulima.accouting.security.token.TokenInterface;
 
 @Service
 public class AuthenticationService implements UserDetailsService {

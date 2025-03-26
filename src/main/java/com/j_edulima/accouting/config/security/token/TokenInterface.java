@@ -1,4 +1,4 @@
-package com.j_edulima.accouting.security.token;
+package com.j_edulima.accouting.config.security.token;
 
 import com.j_edulima.accouting.model.User;
 

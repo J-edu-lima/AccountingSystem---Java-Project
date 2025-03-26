@@ -23,17 +23,56 @@ public class Company {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
-	
+
 	@Embedded
 	private Name name;
-	
+
 	@OneToOne
 	@JoinColumn(name = "usuario_id", nullable = false)
 	private User user;
-	
-	private List<FinancialEntry> financialEntrys = new ArrayList<>();
-	
+
+	@OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Transaction> transactions = new ArrayList<>();
+
 	@OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Report> reports = new ArrayList<>();
+
+	protected Company() {
+	}
+
+	public Company(Long id, Name name, User user) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.user = user;
+	}
+
+	public void addEntry(Transaction entry) {
+		transactions.add(entry);
+	}
+
+	public void addReport(Report report) {
+		reports.add(report);
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public Name getName() {
+		return name;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public List<Transaction> getTransactions() {
+		return transactions;
+	}
+
+	public List<Report> getReports() {
+		return reports;
+	}
 
 }

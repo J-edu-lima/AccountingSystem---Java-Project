@@ -1,4 +1,4 @@
-package com.j_edulima.accouting.security.auth;
+package com.j_edulima.accouting.config.security.auth;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetailsService;
