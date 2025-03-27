@@ -40,11 +40,16 @@ public class Company {
 	protected Company() {
 	}
 
-	public Company(Long id, Name name, User user) {
-		super();
-		this.id = id;
+	public Company(Name name, User user) {
 		this.name = name;
 		this.user = user;
+	}
+
+	public Company(Name name, User user, List<Transaction> transactions, List<Report> reports) {
+		this.name = name;
+		this.user = user;
+		this.transactions = transactions;
+		this.reports = reports;
 	}
 
 	public void addEntry(Transaction entry) {
