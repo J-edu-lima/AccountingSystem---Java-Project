@@ -21,7 +21,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 public class AuthController {
 
 	@Autowired
-	AuthenticationService authenticationService;
+	private AuthenticationService authenticationService;
 
 	@PostMapping("/login")
 	@Operation(summary = "Fornece a autenticação ao usuário", description = "Gera um Token para que o usuário possa acessar requisições que necessitem de permissão.")
