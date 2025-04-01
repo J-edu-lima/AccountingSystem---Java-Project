@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.j_edulima.accouting.dto.UserRequestDTO;
+import com.j_edulima.accouting.dto.UserResponseDTO;
 import com.j_edulima.accouting.model.User;
 import com.j_edulima.accouting.service.UserService;
 
@@ -37,17 +37,17 @@ public class UserController {
 
 	@GetMapping("/{id}")
 	@Operation(summary = "Busca um usuário pelo ID", description = "Retorna um usuário pelo ID fornecido.")
-	public ResponseEntity<UserRequestDTO> find(@PathVariable("id") Long id) {
+	public ResponseEntity<UserResponseDTO> find(@PathVariable("id") Long id) {
 		User user = service.find(id);
 
-		return ResponseEntity.ok().body(new UserRequestDTO(user));
+		return ResponseEntity.ok().body(new UserResponseDTO(user));
 	}
 
 	@GetMapping
 	@Operation(summary = "Busca todos os usuários", description = "Retorna todos os usuários.")
-	public ResponseEntity<List<UserRequestDTO>> findAll() {
+	public ResponseEntity<List<UserResponseDTO>> findAll() {
 		List<User> users = service.findAll();
-		List<UserRequestDTO> userDTOs = users.stream().map(x -> new UserRequestDTO(x)).collect(Collectors.toList());
+		List<UserResponseDTO> userDTOs = users.stream().map(x -> new UserResponseDTO(x)).collect(Collectors.toList());
 
 		return ResponseEntity.ok().body(userDTOs);
 	}

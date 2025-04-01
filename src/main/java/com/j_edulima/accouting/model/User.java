@@ -8,6 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.j_edulima.accouting.model.enums.UserRole;
 import com.j_edulima.accouting.model.valueObject.Email;
 import com.j_edulima.accouting.model.valueObject.Password;
@@ -40,10 +41,16 @@ public class User implements UserDetails {
 	@Enumerated
 	private UserRole role;
 
+	@JsonIgnore
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Company company;
 
 	public User() {
+	}
+	
+	public User(Email email, UserRole role) {
+		this.email = email;
+		this.role = role;
 	}
 
 	public User(Email email, Password password, UserRole role) {
@@ -68,6 +75,10 @@ public class User implements UserDetails {
 
 	public UserRole getRole() {
 		return role;
+	}
+
+	public Company getCompany() {
+		return company;
 	}
 
 	@Override

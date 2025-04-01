@@ -47,6 +47,14 @@ public class CompanyController {
 		return ResponseEntity.status(HttpStatus.OK).build();
 	}
 
+	@GetMapping("/{id}")
+	@Operation(summary = "Busca uma empresa", description = "Busca uma empresa com base no ID fornecido")
+	public ResponseEntity<CompanyResponseDTO> find(@PathVariable("id") Long id) {
+		Company company = service.findById(id);
+
+		return ResponseEntity.ok().body(new CompanyResponseDTO(company));
+	}
+
 	@GetMapping
 	@Operation(summary = "Busca todas as empresas", description = "Buscas todas as empresas registradas no DB")
 	public ResponseEntity<List<CompanyResponseDTO>> findAll() {
@@ -55,14 +63,6 @@ public class CompanyController {
 				.collect(Collectors.toList());
 
 		return ResponseEntity.ok().body(companyDTOs);
-	}
-
-	@GetMapping("/{id}")
-	@Operation(summary = "Busca uma empresa", description = "Busca uma empresa com base no ID fornecido")
-	public ResponseEntity<CompanyResponseDTO> find(@PathVariable("id") Long id) {
-		Company company = service.findById(id);
-
-		return ResponseEntity.ok().body(new CompanyResponseDTO(company));
 	}
 
 }
