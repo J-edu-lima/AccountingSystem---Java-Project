@@ -2,12 +2,11 @@ package com.j_edulima.accouting.dto;
 
 import com.j_edulima.accouting.model.User;
 import com.j_edulima.accouting.model.enums.UserRole;
-import com.j_edulima.accouting.model.valueObject.Email;
 
-public record UserResponseDTO(String username, Email email, UserRole role) {
+public record UserResponseDTO(String username, UserRole role) {
 
 	public UserResponseDTO(User user) {
-		this(user.getUsername(), new Email(user.getEmail()), user.getRole());
+		this(user.getUsername(), user.getRole());
 	}
 
 }

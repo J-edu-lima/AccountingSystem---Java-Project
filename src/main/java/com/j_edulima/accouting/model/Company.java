@@ -68,8 +68,8 @@ public class Company {
 		return name;
 	}
 
-	public User getUser() {
-		return user;
+	public String getUser() {
+		return user.getId().toString();
 	}
 
 	public List<Transaction> getTransactions() {

@@ -26,7 +26,7 @@ public class AuthController {
 	@PostMapping("/login")
 	@Operation(summary = "Fornece a autenticação ao usuário", description = "Gera um Token para que o usuário possa acessar requisições que necessitem de permissão.")
 	public ResponseEntity<Object> login(@RequestBody UserLoginRequestDTO loginRequestDTO) {
-
+		
 		return authenticationService.login(loginRequestDTO);
 	}
 
