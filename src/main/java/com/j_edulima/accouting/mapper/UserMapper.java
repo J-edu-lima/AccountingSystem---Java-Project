@@ -11,24 +11,24 @@ import com.j_edulima.accouting.model.valueObject.Password;
 public class UserMapper {
 
 	public static UserRegisterDTO toDto(User user) {
-		return new UserRegisterDTO(new Email(user.getUsername()), new Password(user.getPassword()));
+		return new UserRegisterDTO(user.getUsername(), new Email(user.getEmail()), new Password(user.getPassword()));
 	}
 
 	public static User toEntity(UserRegisterDTO dto) {
-		return new User(new Email(dto.email().toString()), new Password(dto.password().passwordEncoder(dto.password())),
-				UserRole.USER);
+		return new User(dto.username(), new Email(dto.email().toString()),
+				new Password(dto.password().passwordEncoder(dto.password())), UserRole.USER);
 	}
 
 	public static User toEntity(UserRequestDTO dto) {
-		return new User(new Email(dto.email().toString()), new Password(dto.password().passwordEncoder(dto.password())),
-				UserRole.USER);
+		return new User(dto.username(), new Email(dto.email().toString()),
+				new Password(dto.password().passwordEncoder(dto.password())), UserRole.USER);
 	}
 
 	public static User toEntity(UserResponseDTO dto) {
-		return new User(new Email(dto.email().toString()), UserRole.USER);
+		return new User(dto.username(), UserRole.USER);
 	}
-	
+
 	public static UserResponseDTO toDtoResponse(User user) {
-		return new UserResponseDTO(new Email(user.getUsername()), UserRole.USER);
+		return new UserResponseDTO(user.getUsername(), new Email(user.getEmail()), UserRole.USER);
 	}
 }

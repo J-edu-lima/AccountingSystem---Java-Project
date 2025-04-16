@@ -13,6 +13,7 @@ import com.j_edulima.accouting.model.enums.UserRole;
 import com.j_edulima.accouting.model.valueObject.Email;
 import com.j_edulima.accouting.model.valueObject.Password;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -32,6 +33,9 @@ public class User implements UserDetails {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 
+	@Nullable
+	private String username;
+
 	@Embedded
 	private Email email;
 
@@ -47,13 +51,14 @@ public class User implements UserDetails {
 
 	public User() {
 	}
-	
-	public User(Email email, UserRole role) {
-		this.email = email;
+
+	public User(String username, UserRole role) {
+		this.username = username;
 		this.role = role;
 	}
 
-	public User(Email email, Password password, UserRole role) {
+	public User(String username, Email email, Password password, UserRole role) {
+		this.username = username;
 		this.email = email;
 		this.password = password;
 		this.role = role;
@@ -70,6 +75,10 @@ public class User implements UserDetails {
 
 	@Override
 	public String getUsername() {
+		return username;
+	}
+
+	public String getEmail() {
 		return email.toString();
 	}
 
@@ -102,5 +111,4 @@ public class User implements UserDetails {
 		User other = (User) obj;
 		return Objects.equals(id, other.id);
 	}
-
 }

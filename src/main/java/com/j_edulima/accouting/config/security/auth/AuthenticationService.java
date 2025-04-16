@@ -33,14 +33,14 @@ public class AuthenticationService implements UserDetailsService {
 	private AuthenticationManager authenticationManager;
 
 	@Override
-	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		return repository.findByEmail(email);
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		return repository.findByUsername(username);
 	}
 
 	public ResponseEntity<Object> login(UserLoginRequestDTO login) {
 		try {
 			authenticationManager = context.getBean(AuthenticationManager.class);
-			var usernamePassword = new UsernamePasswordAuthenticationToken(login.email(), login.password());
+			var usernamePassword = new UsernamePasswordAuthenticationToken(login.username(), login.password());
 			var auth = this.authenticationManager.authenticate(usernamePassword);
 			var token = tokenService.generateToken((User) auth.getPrincipal());
 

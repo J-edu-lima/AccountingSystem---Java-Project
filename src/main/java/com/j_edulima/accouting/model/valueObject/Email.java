@@ -11,14 +11,14 @@ public class Email {
 	private static final Pattern pattern = Pattern.compile(regex);
 	
 	@Column(name = "email_value", unique = true)
-	private String value;
+	private String email;
 
 	protected Email() {
 	}
 
-	public Email(String value) {
-		if (validateEmail(value)) {
-			this.value = value;
+	public Email(String email) {
+		if (validateEmail(email)) {
+			this.email = email;
 		}
 	}
 
@@ -30,11 +30,11 @@ public class Email {
 	}
 
 	public String getValue() {
-		return value;
+		return email;
 	}
 
 	@Override
 	public String toString() {
-		return value;
+		return email;
 	}
 }
