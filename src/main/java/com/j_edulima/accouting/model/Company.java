@@ -3,6 +3,7 @@ package com.j_edulima.accouting.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.j_edulima.accouting.model.valueObject.Name;
 
 import jakarta.persistence.CascadeType;
@@ -31,6 +32,7 @@ public class Company {
 	@JoinColumn(name = "usuario_id", nullable = false)
 	private User user;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Transaction> transactions = new ArrayList<>();
 

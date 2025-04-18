@@ -1,0 +1,51 @@
+package com.j_edulima.accouting.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.j_edulima.accouting.dto.TransactionRequestDTO;
+import com.j_edulima.accouting.mapper.TransactionMapper;
+import com.j_edulima.accouting.model.Company;
+import com.j_edulima.accouting.model.Transaction;
+import com.j_edulima.accouting.repository.CompanyRepository;
+import com.j_edulima.accouting.repository.TransactionRepository;
+import com.j_edulima.accouting.service.TransactionService;
+
+@Service
+public class TransactionServiceImpl implements TransactionService {
+
+	@Autowired
+	TransactionRepository repository;
+
+	@Autowired
+	CompanyRepository companyRepository;
+
+	@Override
+	public void register(TransactionRequestDTO transactionDTO, Long id) {
+		Company company = companyRepository.findById(id).orElse(null);
+		Transaction transaction = TransactionMapper.toEntity(transactionDTO, company);
+		
+		repository.save(transaction);
+	}
+
+	@Override
+	public void delete(Long id) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public List<Transaction> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Transaction findById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

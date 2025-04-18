@@ -6,6 +6,7 @@ import com.j_edulima.accouting.model.enums.EntryType;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,9 +24,9 @@ public class Transaction {
 	private Long id;
 
 	@Column(precision = 10, scale = 2)
-	private BigDecimal entry;
+	private BigDecimal entryValue;
 
-	@Enumerated
+	@Enumerated(EnumType.STRING)
 	private EntryType type;
 
 	@ManyToOne
@@ -35,26 +36,34 @@ public class Transaction {
 	protected Transaction() {
 	}
 
-	public Transaction(BigDecimal entry, EntryType type) {
-		super();
-		this.entry = entry;
+	public Transaction(BigDecimal entryValue, EntryType type) {
+		this.entryValue = adjustValueByType(entryValue, type);
 		this.type = type;
 	}
 
-	public double getValorAjustado() {
-		return entry.doubleValue() * type.getFactor();
+	public Transaction(BigDecimal entryValue, EntryType type, Company company) {
+		this.entryValue = adjustValueByType(entryValue, type);
+		this.type = type;
+		this.company = company;
+	}
+
+	private BigDecimal adjustValueByType(BigDecimal entryValue, EntryType type) {
+		return entryValue.multiply(BigDecimal.valueOf(type.getFactor()));
 	}
 
 	public Long getId() {
 		return id;
 	}
 
-	public BigDecimal getEntry() {
-		return entry;
+	public BigDecimal getValue() {
+		return entryValue;
 	}
 
 	public EntryType getType() {
 		return type;
 	}
 
+	public Company getCompany() {
+		return company;
+	}
 }
