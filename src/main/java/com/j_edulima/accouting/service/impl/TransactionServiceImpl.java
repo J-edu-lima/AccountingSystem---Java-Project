@@ -26,26 +26,25 @@ public class TransactionServiceImpl implements TransactionService {
 	public void register(TransactionRequestDTO transactionDTO, Long id) {
 		Company company = companyRepository.findById(id).orElse(null);
 		Transaction transaction = TransactionMapper.toEntity(transactionDTO, company);
-		
+
 		repository.save(transaction);
 	}
 
 	@Override
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
-
+		repository.deleteById(id);
 	}
 
 	@Override
 	public List<Transaction> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.findAll();
 	}
 
 	@Override
 	public Transaction findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		Transaction transaction = repository.findById(id).orElseThrow();
+
+		return transaction;
 	}
 
 }

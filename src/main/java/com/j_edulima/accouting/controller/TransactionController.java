@@ -24,7 +24,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping(value = "/v1/transactions")
-@Tag(name = "transaction", description = "Gerenciamento de transações")
+@Tag(name = "transactions", description = "Gerenciamento de transações")
 public class TransactionController {
 
 	@Autowired
