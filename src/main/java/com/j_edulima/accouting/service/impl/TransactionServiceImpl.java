@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.j_edulima.accouting.dto.TransactionRequestDTO;
+import com.j_edulima.accouting.handler.DataErrorException;
 import com.j_edulima.accouting.mapper.TransactionMapper;
 import com.j_edulima.accouting.model.Company;
 import com.j_edulima.accouting.model.Transaction;
@@ -24,7 +25,7 @@ public class TransactionServiceImpl implements TransactionService {
 
 	@Override
 	public void register(TransactionRequestDTO transactionDTO, Long id) {
-		Company company = companyRepository.findById(id).orElse(null);
+		Company company = companyRepository.findById(id).orElseThrow(() -> new DataErrorException());
 		Transaction transaction = TransactionMapper.toEntity(transactionDTO, company);
 
 		repository.save(transaction);

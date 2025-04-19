@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.j_edulima.accouting.dto.CompanyRequestDTO;
+import com.j_edulima.accouting.handler.DataErrorException;
 import com.j_edulima.accouting.mapper.CompanyMapper;
 import com.j_edulima.accouting.model.Company;
 import com.j_edulima.accouting.model.User;
@@ -24,7 +25,7 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Override
 	public void register(CompanyRequestDTO companyDTO, Long id) {
-		User user = userRepository.findById(id).orElseThrow();
+		User user = userRepository.findById(id).orElseThrow(() -> new DataErrorException());
 		Company company = CompanyMapper.toEntity(companyDTO, user);
 		repository.save(company);
 	}

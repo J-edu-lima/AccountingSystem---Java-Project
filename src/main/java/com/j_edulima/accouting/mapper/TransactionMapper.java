@@ -15,8 +15,8 @@ public class TransactionMapper {
 		return new Transaction(dto.entryValue(), dto.type(), company);
 	}
 
-	public static TransactionResponseDTO toDtoResponse(Transaction transaction, Company company1) {
-		return new TransactionResponseDTO(transaction.getValue(), transaction.getType(), company1);
+	public static TransactionResponseDTO toDtoResponse(Transaction transaction, Long companyId) {
+		return new TransactionResponseDTO(transaction.getValue(), transaction.getType(), companyId);
 	}
 
 	public static Transaction toEntityResponse(TransactionResponseDTO dto, Company company) {
