@@ -1,8 +1,9 @@
 package com.j_edulima.accouting.model;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.j_edulima.accouting.model.enums.ReportType;
 
 import jakarta.persistence.Entity;
@@ -25,10 +26,11 @@ public class Report {
 	@Enumerated
 	private ReportType type;
 
-	private LocalDate generationDate;
+	private LocalDateTime generationDate;
 
 	private BigDecimal calculatedValue;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "company_id", nullable = false)
 	private Company company;
@@ -36,10 +38,10 @@ public class Report {
 	protected Report() {
 	}
 
-	public Report(ReportType type, LocalDate generationDate, Company company, BigDecimal calculatedValue) {
+	public Report(ReportType type, LocalDateTime generationDate, Company company, BigDecimal calculatedValue) {
 		super();
 		this.type = type;
-		this.generationDate = LocalDate.now();
+		this.generationDate = LocalDateTime.now();
 		this.company = company;
 		this.calculatedValue = calculatedValue;
 	}
@@ -52,7 +54,7 @@ public class Report {
 		return type;
 	}
 
-	public LocalDate getGenerationDate() {
+	public LocalDateTime getGenerationDate() {
 		return generationDate;
 	}
 

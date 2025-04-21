@@ -1,7 +1,7 @@
 package com.j_edulima.accouting.strategy;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import com.j_edulima.accouting.model.Company;
 import com.j_edulima.accouting.model.Report;
@@ -21,6 +21,6 @@ public class WorkingCapitalCalculation implements ReportCalculationStrategy {
 
 		BigDecimal workingCapital = totalRevenue.subtract(totalExpenses);
 
-		return new Report(ReportType.WORKING_CAPITAL, LocalDate.now(), company, workingCapital);
+		return new Report(ReportType.WORKING_CAPITAL, LocalDateTime.now(), company, workingCapital);
 	}
 }

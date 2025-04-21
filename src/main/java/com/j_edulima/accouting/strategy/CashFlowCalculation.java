@@ -1,7 +1,7 @@
 package com.j_edulima.accouting.strategy;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import com.j_edulima.accouting.model.Company;
 import com.j_edulima.accouting.model.Report;
@@ -14,7 +14,7 @@ public class CashFlowCalculation implements ReportCalculationStrategy {
 		BigDecimal cashFlow = company.getTransactions().stream().map(Transaction::getValue).reduce(BigDecimal.ZERO,
 				BigDecimal::add);
 
-		return new Report(ReportType.CASH_FLOW, LocalDate.now(), company, cashFlow);
+		return new Report(ReportType.CASH_FLOW, LocalDateTime.now(), company, cashFlow);
 	}
 
 }

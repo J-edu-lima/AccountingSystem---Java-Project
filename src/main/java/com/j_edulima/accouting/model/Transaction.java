@@ -1,7 +1,9 @@
 package com.j_edulima.accouting.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.j_edulima.accouting.model.enums.EntryType;
 
 import jakarta.persistence.Column;
@@ -29,6 +31,9 @@ public class Transaction {
 	@Enumerated(EnumType.STRING)
 	private EntryType type;
 
+	private LocalDateTime generationDate;
+
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "company_id", nullable = false)
 	private Company company;
@@ -41,9 +46,10 @@ public class Transaction {
 		this.type = type;
 	}
 
-	public Transaction(BigDecimal entryValue, EntryType type, Company company) {
+	public Transaction(BigDecimal entryValue, EntryType type, LocalDateTime generationDate, Company company) {
 		this.entryValue = adjustValueByType(entryValue, type);
 		this.type = type;
+		this.generationDate = LocalDateTime.now();
 		this.company = company;
 	}
 
@@ -61,6 +67,10 @@ public class Transaction {
 
 	public EntryType getType() {
 		return type;
+	}
+
+	public LocalDateTime getGenerationDate() {
+		return generationDate;
 	}
 
 	public Company getCompany() {
